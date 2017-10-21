@@ -1,0 +1,44 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.vetoer.dao.UserDao">
+    <insert id="addUser">
+       insert IGNORE INTO
+       user(phone,name,password)
+       VALUES(#{phone},#{name},#{password})
+    </insert>
+
+    <select id="queryByPhone" resultType="User">
+        select user_id,phone,name
+        from user
+        where phone=#{phone}
+    </select>
+
+    <select id="matchUser" resultType="User">
+        select user_id,phone,name,password
+        from user
+        where phone=#{phone}
+        and password=#{password}
+    </select>
+
+    <select id="queryById" resultType="SuccessKilled" parameterType="long">
+        <!--根据seckillId查询SuccessKilled对象,并携带Seckill对象-->
+        <!--如何告诉mybatis把结果映射到SuccessKill属性同时映射到Seckill属性-->
+        SELECT
+        sk.seckill_id,
+        sk.user_id,
+        sk.create_time,
+        sk.state,
+        s.seckill_id "seckill.seckill_id",
+        s.name "seckill.name",
+        s.number "seckill.number",
+        s.start_time "seckill.start_time",
+        s.end_time "seckill.end_time",
+        s.create_time "seckill.create_time"
+        from success_killed sk
+        inner JOIN seckill s ON
+        sk.seckill_id=s.seckill_id
+        where sk.seckill_id=s.seckill_id
+        and sk.user_id=#{userId}
+    </select>
+</mapper>

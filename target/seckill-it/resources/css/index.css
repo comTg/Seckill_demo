@@ -1,0 +1,11 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 70px;
+}
+dt,dd{
+    margin-bottom: 10px;
+}
