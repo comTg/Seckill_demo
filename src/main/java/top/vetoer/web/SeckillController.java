@@ -70,15 +70,15 @@ public class SeckillController {
     @ResponseBody
     public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId") Long seckillId,
                                                    @PathVariable("md5") String md5,
-                                                   @CookieValue(value = "killPhone",required = false) Long phone){
+                                                   @SessionAttribute(value = "userId",required = false)long userId){
         SeckillResult<SeckillExecution> result;
         // springmvc valid
-        if(phone == null){
-            return new SeckillResult<SeckillExecution>(false,"未注册");
+        if(userId == 0){
+            return new SeckillResult<SeckillExecution>(false,"未登录");
         }
         try{
             // 存储过程调用
-            SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, phone, md5);
+            SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, userId, md5);
             return new SeckillResult<SeckillExecution>(true,execution);
 
         }catch(RepeatKillException e1){

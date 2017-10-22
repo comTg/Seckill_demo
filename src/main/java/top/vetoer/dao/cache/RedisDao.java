@@ -3,19 +3,27 @@ package top.vetoer.dao.cache;
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
+import org.springframework.stereotype.Repository;
 import redis.clients.jedis.JedisPoolConfig;
 import top.vetoer.entity.Seckill;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+@Repository
 public class RedisDao {
     private JedisPool jedisPool;
     private JedisPoolConfig config;
+    // 配置jedis连接池
     public RedisDao(int maxIdle,int maxTotal,String ip,int port,int timeout,String password){
         config = new JedisPoolConfig();
         config.setMaxIdle(maxIdle);
         config.setMaxTotal(maxTotal);
         jedisPool = new JedisPool(config,ip,port,timeout,password);
+    }
+
+    public Jedis getJedis(){
+        Jedis jedis = jedisPool.getResource();
+        return jedis;
     }
 
     private RuntimeSchema<Seckill> schema = RuntimeSchema.createFrom(Seckill.class);

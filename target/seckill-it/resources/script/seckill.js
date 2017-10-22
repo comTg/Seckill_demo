@@ -92,17 +92,14 @@ var seckill = {
         init: function (params) {
             // 手机验证和登录,计时交互
             // 规划交互流程
-            // 在cookie中查找手机号
 
-            var killPhone = $.cookie('killPhone');    // TODO
+            // var killPhone = $.cookie('killPhone');    // TODO
+            var userId = $.cookie('USERID');
 
             var startTime = params['startTime'];
             var seckillId = params['seckillId'];
             var endTime = params['endTime'];
-
-            //验证手机号                              // TODO
-            if (!seckill.validatePhone(killPhone)) {
-                // 绑定手机号
+            if (userId == null) {
                 // 控制输出
                 var killPhoneModal = $('#killPhoneModal');
                 // 显示弹出层
@@ -111,17 +108,9 @@ var seckill = {
                     backdrop: 'static', //禁止位置关闭
                     keyboard: false // 关闭键盘事件
                 });
+                $('#killMessage').hide().html('<label class="label label-danger">尚未登录,请登录</label>').show(300);
                 $('#killPhoneBtn').click(function () {
-                    var inputPhone = $('#killPhoneKey').val();
-                    console.log('inputPhone=' + inputPhone);
-                    if (seckill.validatePhone(inputPhone)) {
-                        // 电话写入cookie
-                        $.cookie('killPhone', inputPhone, {expires: 7, path: '/seckill'});
-                        // 刷新页面
-                        window.location.reload();
-                    } else {
-                        $('#killPhoneMessage').hide().html('<label class="label label-danger">手机号错误</label>').show(300);
-                    }
+                    window.location.href="/seckill/login";
                 });
             }
 
@@ -139,6 +128,17 @@ var seckill = {
             });
 
         },
-
+    },
+    judge_login:function(){
+        // 判断浏览器中是否保存了cookie
+        var userId = $.cookie('USERID');
+        console.log(userId);
+        if(userId!=null){
+            $('#per-center').removeClass("hidden");
+            $('#need-login').addClass("hidden");
+        }else{
+            $('#need-login').removeClass("hidden");
+            $('#per-center').addClass("hidden");
+        }
     },
 }

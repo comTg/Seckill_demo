@@ -313,6 +313,9 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+  </component>
   <component name="dataSourceStorageLocal">
     <data-source name="@localhost" uuid="f580dc17-b913-4fb4-9fbd-91c1b9ee66d4">
       <database-info product="MySQL" version="5.7.19-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">

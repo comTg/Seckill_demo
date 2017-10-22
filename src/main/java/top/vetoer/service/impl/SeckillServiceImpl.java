@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import top.vetoer.utils.SeckillUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -30,10 +31,6 @@ public class SeckillServiceImpl implements SeckillService {
     //日志对象
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // 加入一个混淆字符串(秒杀接口)的salt,为了避免用户猜出我们的md5值,值任意给,越复杂越好
-    private final String salt = "com.sdfasd+)sdf2----";
-
-    //
     @Autowired
     private RedisDao redisDao;
 
@@ -104,15 +101,23 @@ public class SeckillServiceImpl implements SeckillService {
             return new Exposer(false, seckillId, nowTime.getTime(), startTime.getTime(), endTime.getTime());
         }
         // 秒杀开启,返回秒杀商品的id,用给接口加密的md5
-        String md5 = getMD5(seckillId);
+        String md5 = SeckillUtils.getMD5(seckillId);
         return new Exposer(true, md5, seckillId);
     }
 
-    private String getMD5(long seckillId) {
-        String base = seckillId + "/" + salt;
-        String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
-        return md5;
+    /**
+     * 根据输入名查找指定商品
+     */
+    public List<Seckill> queryByName(String name){
+        if(name!=null){
+            // 模糊查询
+            String matchName = "%"+name+"%";
+            List<Seckill> seckills = seckillDao.queryByName(matchName);
+            return seckills;
+        }
+        return null;
     }
+
 
     /**
      * 执行秒杀操作,有可能失败,有可能成功,所以我们要抛出异常
@@ -124,7 +129,7 @@ public class SeckillServiceImpl implements SeckillService {
      */
     @Override
     public SeckillExecution executeSeckill(long seckillId, long userId, String md5) throws SeckillException, RepeatKillException, SeckillException {
-        if (md5 == null || !md5.equals(getMD5(seckillId))) {
+        if (md5 == null || !md5.equals(SeckillUtils.getMD5(seckillId))) {
             throw new SeckillException("seckill data rewrite"); // 秒杀数据被重写了
         }
         // 执行秒杀逻辑:减库存+增加购买明细
@@ -167,7 +172,7 @@ public class SeckillServiceImpl implements SeckillService {
      */
     @Override
     public SeckillExecution executeSeckillProcedure(long seckillId, long userId, String md5) {
-        if (md5 == null || !md5.equals(getMD5(seckillId))) {
+        if (md5 == null || !md5.equals(SeckillUtils.getMD5(seckillId))) {
             return new SeckillExecution(seckillId, SeckillStatEnum.DATA_REWRITE);
 
         }

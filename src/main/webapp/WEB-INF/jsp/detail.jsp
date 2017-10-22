@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>秒杀详情页</title>
-    <%@include file="common/head.jsp"%>
+    <jsp:include page="common/navbar.jsp" flush="true" />
 </head>
 <body>
 <div class="container">
@@ -44,15 +44,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-8 col-xs-offset-2">
-                        <input type="text" name="killPhone" id="killPhoneKey"
-                               placeholder="填写手机号^o^" class="form-control">
+                        <%--验证信息--%>
+                        <span id="killMessage" class="glyphicon"> </span>
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <%--验证信息--%>
-                <span id="killPhoneMessage" class="glyphicon"> </span>
                 <button type="button" id="killPhoneBtn" class="btn btn-success">
                     <span class="glyphicon glyphicon-phone"></span>
                     Submit
@@ -65,16 +63,7 @@
 </div>
 
 </body>
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<%--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>--%>
-<script src="/resources/js/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<%--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-<script src="/resources/js/bootstrap.min.js"></script>
-<%--使用CDN 获取公共js http://www.bootcdn.cn/--%>
-<%--jQuery Cookie操作插件--%>
-<%--<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>--%>
-<script src="/resources/js/jquery.cookie.min.js"></script>
+
 <%--jQuery countDown倒计时插件--%>
 <%--<script src="http://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>--%>
 <script src="/resources/js/jquery.countdown.min.js"></script>

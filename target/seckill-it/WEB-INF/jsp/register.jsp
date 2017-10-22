@@ -9,11 +9,11 @@
 <!Doctype html>
 <head>
     <title>注册页面</title>
-    <%@include file="common/head.jsp"%>
     <%--从cdn引入font-awdsome字体css--%>
     <%--<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">--%>
     <link href="/resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="/resources/css/userPage.css" rel="stylesheet">
+    <%@include file="common/navbar.jsp"%>
 </head>
 <body>
 <div class="container">

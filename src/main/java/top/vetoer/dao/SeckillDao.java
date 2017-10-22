@@ -34,6 +34,19 @@ public interface SeckillDao {
     List<Seckill> queryAll(@Param("offset") int offset,@Param("limit") int limit);
 
     /**
+     * 查询全部
+     * @return
+     */
+    List<Seckill> queryAll();
+
+    /**
+     * 根据输入名查找匹配秒杀商品
+     * @param name
+     * @return
+     */
+    List<Seckill> queryByName(String name);
+
+    /**
      * 使用存储过程执行秒杀
      * @param paramMap
      */

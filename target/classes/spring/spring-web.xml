@@ -28,10 +28,6 @@
     <!--配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/seckill/*/exposer"/>
-            <ref bean="loginInterceptor" />
-        </mvc:interceptor>
-        <mvc:interceptor>
             <mvc:mapping path="/seckill/*/execcution"/>
             <ref bean="loginInterceptor" />
         </mvc:interceptor>

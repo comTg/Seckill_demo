@@ -23,6 +23,11 @@
         ORDER BY create_time DESC
         limit #{offset},#{limit}
     </select>
+    <select id="queryByName" resultType="Seckill">
+        select seckill_id,name,number,start_time,end_time,create_time
+        from seckill
+        where name=#{name}
+    </select>
     <!--mybatis调用存储过程-->
     <select id="killByProcedure" statementType="CALLABLE">
         call execute_seckill(

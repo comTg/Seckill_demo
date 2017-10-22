@@ -8,6 +8,7 @@
     <!--配置整合mybatis过程
     1.配置数据库相关参数-->
     <context:property-placeholder location="classpath:jdbc.properties" />
+    <context:property-placeholder location="classpath:redis.properties" />
 
     <!--2:数据库连接池-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -67,11 +68,12 @@
     <bean id="redisDao" class="top.vetoer.dao.cache.RedisDao">
         <constructor-arg index="0" value="8" />
         <constructor-arg index="1" value="18" />
-        <constructor-arg index="2" value="67.216.218.113" />
+        <constructor-arg index="2" value="127.0.0.1" />
         <constructor-arg index="3" value="6379" />
         <constructor-arg index="4" value="3000" />
         <constructor-arg index="5" value="tgredis" />
     </bean>
-    <!--配置登录拦截器bean-->
+    <!--配置拦截器bean-->
     <bean id="loginInterceptor" class="top.vetoer.interceptor.LoginInterceptor" />
+    <bean id="markUrlInterceptor" class="top.vetoer.interceptor.MarkUrlInterceptor" />
 </beans>
