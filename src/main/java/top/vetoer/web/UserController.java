@@ -72,12 +72,6 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-//        String submitDuplicate = String.valueOf(req.getAttribute("submitDuplicate"));
-//        if(!"null".equals(submitDuplicate) && "true".equals(submitDuplicate)){
-//            // 重复提交,重定向到login
-//            req.removeAttribute("submitDuplicate");
-//            return "redirect:/seckill/login";
-//        }
         // 1.校验验证码是否过期
         String currentExpireTime = String.valueOf(session.getAttribute(EXPIRE_TIME));
         if(!"null".equals(currentExpireTime) &&

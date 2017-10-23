@@ -78,7 +78,8 @@ if(origin!=null){
 <script type="text/javascript">
     $(function(){
         // 判断是否登录
-        seckill.judge_login();
+        var userName = "${userName}";
+        seckill.judge_login(userName);
     })
 </script>
 </html>

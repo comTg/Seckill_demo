@@ -129,11 +129,11 @@ var seckill = {
 
         },
     },
-    judge_login: function () {
+    judge_login: function (userName) {
         // 判断浏览器中是否保存了cookie
         var userId = $.cookie('USERID');
         console.log(userId);
-        if (userId != null) {
+        if (userId != null && userName!="") {
             $('#per-center').removeClass("hidden");
             $('#need-login').addClass("hidden");
         } else {
