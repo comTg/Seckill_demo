@@ -1,5 +1,6 @@
 package top.vetoer.web;
 
+import com.google.code.kaptcha.Producer;
 import top.vetoer.dto.Exposer;
 import top.vetoer.dto.SeckillExecution;
 import top.vetoer.dto.SeckillResult;
@@ -27,11 +28,13 @@ public class SeckillController {
     @Autowired
     private SeckillService seckillService;
 
+
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(Model model){
         // 获取列表页
         List<Seckill> list =  seckillService.getSeckillList();
         model.addAttribute("list",list);
+        model.addAttribute("type","秒杀");
         // list.jsp+model = ModelAndView
         return "list"; ///WEB-INF/jsp/list.jsp
     }
@@ -94,6 +97,19 @@ public class SeckillController {
             SeckillExecution execution = new SeckillExecution(seckillId,SeckillStatEnum.INNER_ERROR);
             return new SeckillResult<SeckillExecution>(true,execution);
         }
+    }
+
+    @RequestMapping(value = "/query",method = RequestMethod.GET)
+    public String queryList(Model model,String orderName){
+        // 获取查询列表
+        List<Seckill> list = seckillService.queryByName(orderName);
+        if(list!=null && list.size()>0){
+            model.addAttribute("list",list);
+        }else{
+            model.addAttribute("listEmpty","查询列表为空");
+        }
+        model.addAttribute("type","查询");
+        return "list";
     }
 
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)

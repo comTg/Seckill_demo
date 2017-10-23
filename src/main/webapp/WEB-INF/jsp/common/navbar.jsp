@@ -56,7 +56,7 @@ if(origin!=null){
                 <li><a href="/seckill/login">登录</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-right">
+                <form class="navbar-form navbar-right" action="/seckill/query" method="get">
                     <input type="text" class="form-control" name="orderName" placeholder="搜索">
                 </form>
             </ul>

@@ -110,7 +110,7 @@ var seckill = {
                 });
                 $('#killMessage').hide().html('<label class="label label-danger">尚未登录,请登录</label>').show(300);
                 $('#killPhoneBtn').click(function () {
-                    window.location.href="/seckill/login";
+                    window.location.href = "/seckill/login";
                 });
             }
 
@@ -129,16 +129,37 @@ var seckill = {
 
         },
     },
-    judge_login:function(){
+    judge_login: function () {
         // 判断浏览器中是否保存了cookie
         var userId = $.cookie('USERID');
         console.log(userId);
-        if(userId!=null){
+        if (userId != null) {
             $('#per-center').removeClass("hidden");
             $('#need-login').addClass("hidden");
-        }else{
+        } else {
             $('#need-login').removeClass("hidden");
             $('#per-center').addClass("hidden");
         }
+    },
+    loadValidateCode: function () {
+        var time = new Date().getTime();
+        $("#validateCodeImage").attr('src', '/seckill/loadValidateCode')
+    },
+//    验证表单是否输入验证码用户名以及密码
+    interceptform: function () {
+        $('form').submit(function (e) {
+            var node = $('#errorTips');
+            var phone = $('#phone').val();
+            var password = $('#password').val();
+            if (phone == null || password == null || password.length < 3) {
+                node.hide().html('<label class="label label-danger">用户名或密码填写格式错误</label>').show(300);
+                e.preventDefault();
+            }
+            var validateCode = $('#validateCode').val();
+            if (validateCode == null || validateCode.length != 4) {
+                node.hide().html('<label class="label label-danger">验证码格式错误</label>').show(300);
+                e.preventDefault();
+            }
+        });
     },
 }

@@ -75,5 +75,21 @@
     </bean>
     <!--配置拦截器bean-->
     <bean id="loginInterceptor" class="top.vetoer.interceptor.LoginInterceptor" />
-    <bean id="markUrlInterceptor" class="top.vetoer.interceptor.MarkUrlInterceptor" />
+    <!--配置图片验证码bean-->
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">no</prop>
+                        <prop key="kaptcha.image.width">120</prop>
+                        <prop key="kaptcha.session.key">code</prop>
+                        <prop key="kaptcha.textproducer.font.color">blue</prop>
+                        <prop key="kaptcha.textproducer.font.size">40</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
 </beans>

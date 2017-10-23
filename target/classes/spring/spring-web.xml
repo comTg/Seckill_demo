@@ -35,6 +35,10 @@
             <mvc:mapping path="/seckill/*/detail"/>
             <bean class="top.vetoer.interceptor.LoginInterceptor" />
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/seckill/login"/>
+            <bean class="top.vetoer.interceptor.TokenValidator" />
+        </mvc:interceptor>
     </mvc:interceptors>
 
 

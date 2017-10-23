@@ -17,6 +17,13 @@ public interface SeckillService {
      * 查询单个秒杀记录
      */
     Seckill getById(long seckillId);
+
+    /**
+     * 根据输入名查询列表
+     * @param name
+     * @return
+     */
+    List<Seckill> queryByName(String name);
     /**
      * 在秒杀开启时输出秒杀接口的地址,否则输出系统时间和秒杀时间
      */

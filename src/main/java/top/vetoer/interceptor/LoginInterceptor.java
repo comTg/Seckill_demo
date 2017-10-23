@@ -14,17 +14,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-//        String url = request.getRequestURL().toString();  // todo:删除
-//        if(url!=null){
-//            session.setAttribute("url",url);
-//            System.out.println("loginInterceptor:"+url);
-//        }
         if(session.getAttribute("userId")!=null){
             // session中含有id属性,用户已登录
             return true;
         }
         // 没有登录,跳转到登录页面
-       //request.getRequestDispatcher("/seckill/login").forward(request,response);
         response.sendRedirect(request.getContextPath()+"/seckill/login");
         return false;
     }

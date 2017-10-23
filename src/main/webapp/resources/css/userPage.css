@@ -125,3 +125,8 @@
         padding: 10px 20px;
     }
 }
+/*出错提示信息*/
+.error-tips{
+    position:relative!important;
+    top: -20px !important;
+}

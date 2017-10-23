@@ -20,7 +20,7 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h2>秒杀列表</h2>
+            <h2>${type}列表</h2>
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -36,7 +36,7 @@
                 </thead>
                 <tbody>
                      <c:forEach var="sk" items="${list}">
-                         <tr>
+                         <tr class="orderList">
                              <td>${sk.name}</td>
                              <td>${sk.number}</td>
                              <td><fmt:formatDate value="${sk.startTime}"  pattern="yyyy-MM-dd HH:mm:ss" /> </td>
@@ -47,6 +47,7 @@
                      </c:forEach>
                 </tbody>
             </table>
+            <span class="text-center center-block emptyTips">${listEmpty}</span>
         </div>
     </div>
 </div>

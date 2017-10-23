@@ -9,3 +9,10 @@ body {
 dt,dd{
     margin-bottom: 10px;
 }
+.emptyTips{
+    font-size: 20px;
+    color:#b92c28;
+}
+.orderList>td{
+    line-height:34px!important;
+}
