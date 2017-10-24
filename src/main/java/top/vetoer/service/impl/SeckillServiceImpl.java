@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import top.vetoer.utils.Page;
 import top.vetoer.utils.SeckillUtils;
 
 import java.util.Date;
@@ -46,7 +47,24 @@ public class SeckillServiceImpl implements SeckillService {
      */
     @Override
     public List<Seckill> getSeckillList() {
-        return seckillDao.queryAll(0, 4);
+        return seckillDao.queryAll();
+    }
+
+    @Override
+    public List<Seckill> queryByPage(Page page) {
+        int offset = page.getStartPos();
+        int pageSize = page.getPageSize();
+        List<Seckill> seckills = seckillDao.queryPage(offset,pageSize);
+        return seckills;
+    }
+
+    /**
+     * 查询商品总数量
+     * @return
+     */
+    @Override
+    public int queryTotal() {
+        return seckillDao.getProductsCount();
     }
 
     /**

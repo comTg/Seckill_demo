@@ -26,12 +26,18 @@ public interface SeckillDao {
     Seckill queryById(long seckillId);
 
     /**
-     * 根据偏移量查询秒杀商品列表
+     * 根据偏移量查询秒杀商品列表,分页查询
      * @param offset
      * @param limit
      * @return
      */
-    List<Seckill> queryAll(@Param("offset") int offset,@Param("limit") int limit);
+    List<Seckill> queryPage(@Param("offset") int offset,@Param("limit") int limit);
+
+    /**
+     * 查询列表中商品数量
+     * @return
+     */
+    Integer getProductsCount();
 
     /**
      * 查询全部

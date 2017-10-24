@@ -14,6 +14,7 @@
     <title>秒杀列表页</title>
     <%--<jsp:include page="common/navbar.jsp" flush="true" />--%>
     <%@include file="common/navbar.jsp"%>
+    <%@include file="common/tag.jsp"%>
 </head>
 <body>
 <!-- 页面显示部分 -->
@@ -48,6 +49,35 @@
                 </tbody>
             </table>
             <span class="text-center center-block emptyTips">${listEmpty}</span>
+        </div>
+        <div class="row clearfix">
+            <div class="text-center center-block">
+                <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${page==null}">
+                        </c:when>
+                        <c:when test="${page!=null}">
+                            <c:if test="${page.pageNow-1>0}">
+                                <li>
+                                    <a href="/seckill/list?page=${page.pageNow-1}">&lt;</a>
+                                </li>
+                            </c:if>
+                            <c:forEach var="i" begin="1" end="${page.totalPageCount}">
+                                <li <c:if test="${page.pageNow==i}">
+                                    <c:out value="class=active" />
+                                </c:if>>
+                                    <a href="/seckill/list?page=${i}">${i}</a>
+                                </li>
+                            </c:forEach>
+                            <c:if test="${page.pageNow-page.totalPageCount<0}">
+                                <li>
+                                    <a href="/seckill/list?page=${page.pageNow+1}">&gt;</a>
+                                </li>
+                            </c:if>
+                        </c:when>
+                    </c:choose>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

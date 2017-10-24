@@ -5,6 +5,7 @@ import top.vetoer.dto.SeckillExecution;
 import top.vetoer.entity.Seckill;
 import top.vetoer.exception.RepeatKillException;
 import top.vetoer.exception.SeckillException;
+import top.vetoer.utils.Page;
 
 import java.util.List;
 
@@ -13,6 +14,19 @@ public interface SeckillService {
      * 查询全部的秒杀记录
      */
     List<Seckill> getSeckillList();
+
+    /**
+     * 分页查询数据
+     * @param page
+     * @return
+     */
+    List<Seckill> queryByPage(Page page);
+
+    /**
+     * 查询商品总数
+     * @return
+     */
+    int queryTotal();
     /**
      * 查询单个秒杀记录
      */
